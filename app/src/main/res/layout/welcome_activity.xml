@@ -10,7 +10,8 @@
         android:id="@+id/totoro"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:contentDescription="@string/totoroContentDescription" />
+        android:contentDescription="@string/totoroContentDescription"
+        android:src="@drawable/totoro_logo"/>
 
     <TextView
         android:id="@+id/welcome_text"
