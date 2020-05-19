@@ -10,7 +10,7 @@ public class WelcomeActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome_activity);
+        setContentView(R.layout.welcome);
 
         WelcomeController controller = new WelcomeController(this);
         controller.onStart();

@@ -5,7 +5,7 @@
         android:allowBackup="true"
         android:supportsRtl="true">
         <activity
-            android:name=".RecyclerviewFilms"
+            android:name=".RecyclerViewFilmsActivity"
             android:banner="@style/Theme.AppCompat.Light.DarkActionBar"
             android:label="Ghibli films" />
         <activity

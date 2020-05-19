@@ -6,10 +6,11 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 
-public class RecyclerviewFilms extends Activity {
+public class RecyclerViewFilmsActivity extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //TODO add checkbox
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recyclerview_films);
     }

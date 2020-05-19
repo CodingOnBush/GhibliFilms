@@ -22,7 +22,7 @@ public class WelcomeController {
     }
 
     public void navigateToRecyclerviewFilms(){
-        Intent intent = new Intent(welcomeActivity, RecyclerviewFilms.class);
+        Intent intent = new Intent(welcomeActivity, RecyclerViewFilmsActivity.class);
         welcomeActivity.startActivity(intent);
         welcomeActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         //TODO Ajouter une animation pour revenir en arrière avec un swipe
