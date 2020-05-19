@@ -15,18 +15,7 @@ public class WelcomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_activity);
 
-        Button button_welcome = this.findViewById(R.id.welcome_button);
-        button_welcome.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                navigateToRecyclerviewFilms();
-            }
-        });
-    }
-
-    public void navigateToRecyclerviewFilms(){
-        Intent intent = new Intent(this, RecyclerviewFilms.class);
-        this.startActivity(intent);
-        this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        WelcomeController controller = new WelcomeController(this);
+        controller.onStart();
     }
 }

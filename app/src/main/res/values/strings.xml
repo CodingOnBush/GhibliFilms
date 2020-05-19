@@ -3,4 +3,6 @@
     <string name="welcome_text">WELCOME</string>
     <string name="welcome_button">GO</string>
     <string name="totoroContentDescription">Official logo of Studio Ghibli</string>
+    <string name="film_title_text">Film title</string>
+    <string name="film_poster">Film poster</string>
 </resources>
