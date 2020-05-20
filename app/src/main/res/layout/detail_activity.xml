@@ -2,15 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@android:color/black"
+    android:orientation="vertical"
+    android:scrollbars="vertical"
+    android:scrollbarThumbVertical="@null">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bande annonce"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"/>
 
     <WebView
         android:id="@+id/trailler"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="300dp" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/littleFilmPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:id="@+id/filmAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/littleFilmPoster"/>
+        <TextView
+            android:id="@+id/filmDirector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/filmAuthor"/>
+
+    </RelativeLayout>
+
+
     <TextView
+        android:id="@+id/filmDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

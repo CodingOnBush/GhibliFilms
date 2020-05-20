@@ -1,13 +1,13 @@
 package com.example.ghiblifilms;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,23 +16,24 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 class RecyclerViewFilmsController {
-    private RecyclerViewFilmsActivity view;
+    private FilmsActivity view;
     private ArrayList<Film> filmArrayList;
+    private Gson gson;
 
-    RecyclerViewFilmsController(RecyclerViewFilmsActivity view, ArrayList<Film> filmArrayList) {
+    RecyclerViewFilmsController(FilmsActivity view, ArrayList<Film> filmArrayList) {
         this.view = view;
         this.filmArrayList = filmArrayList;
     }
 
     void onStart(){
+        gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
         makeApiCall();
     }
 
     private void makeApiCall(){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -67,5 +68,15 @@ class RecyclerViewFilmsController {
         Intent intent = new Intent(view, DetailActivity.class);
         view.startActivity(intent);
         view.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+    public void saveCurrentFilm(Film currentFilm) {
+        String jsonString = gson.toJson(currentFilm);
+
+        SharedPreferences settings = view.getSharedPreferences("CURFILM", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.remove("currentFilm");
+        editor.putString("currentFilm", currentFilm.getTitle());
+        editor.apply();
     }
 }
