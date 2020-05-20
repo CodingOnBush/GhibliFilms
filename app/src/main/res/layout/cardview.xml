@@ -25,10 +25,11 @@
             android:id="@+id/filmTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
+            android:paddingTop="2dp"
             android:text="@string/film_title_text"
+            android:fontFamily="cursive"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textColor="@color/rowFilmColor"
+            android:textSize="25sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

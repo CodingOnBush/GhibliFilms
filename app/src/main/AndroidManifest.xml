@@ -9,7 +9,7 @@
         android:supportsRtl="true">
         <activity
             android:name=".RecyclerViewFilmsActivity"
-            android:banner="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:banner="@color/colorPrimary"
             android:label="Ghibli films" />
         <activity
             android:name=".WelcomeActivity"
