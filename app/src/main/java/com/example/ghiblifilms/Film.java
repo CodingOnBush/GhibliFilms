@@ -3,20 +3,20 @@ package com.example.ghiblifilms;
 import java.util.ArrayList;
 
 public class Film {
-    private int id;
+    private String id;
     private String title;
     private String description;
     private String director;
     private String producer;
-    private int release_date;
-    private int rt_score;
+    private String release_date;
+    private String rt_score;
     private ArrayList<String> people;
     private ArrayList<String> species;
     private ArrayList<String> locations;
     private ArrayList<String> vehicles;
     private String url;
 
-    public Film(int id, String title, String description, String director, String producer, int release_date, int rt_score, ArrayList<String> people, ArrayList<String> species, ArrayList<String> locations, ArrayList<String> vehicles, String url) {
+    public Film(String id, String title, String description, String director, String producer, String release_date, String rt_score, ArrayList<String> people, ArrayList<String> species, ArrayList<String> locations, ArrayList<String> vehicles, String url) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -31,7 +31,7 @@ public class Film {
         this.url = url;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -51,11 +51,11 @@ public class Film {
         return producer;
     }
 
-    public int getRelease_date() {
+    public String getRelease_date() {
         return release_date;
     }
 
-    public int getRt_score() {
+    public String getRt_score() {
         return rt_score;
     }
 

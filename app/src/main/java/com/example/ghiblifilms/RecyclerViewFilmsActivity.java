@@ -8,9 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class RecyclerViewFilmsActivity extends Activity {
+    private RecyclerView recyclerView;
+    private ListAdapter listAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<Film> filmArrayList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,7 +23,9 @@ public class RecyclerViewFilmsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recyclerview_films);
 
-        RecyclerViewFilmsController controller = new RecyclerViewFilmsController(this);
+        filmArrayList = new ArrayList<Film>();
+
+        RecyclerViewFilmsController controller = new RecyclerViewFilmsController(this, filmArrayList);
         controller.onStart();
     }
 
@@ -29,11 +36,15 @@ public class RecyclerViewFilmsActivity extends Activity {
     }
 
     public void showFilmList(ArrayList<Film> filmArrayList){
-        RecyclerView mRecyclerView = this.findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
+        recyclerView = this.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);// Pour augmenter un petit peu les perf
+        layoutManager = new LinearLayoutManager(
                 this,
                 LinearLayoutManager.HORIZONTAL,
                 false);
-        //TODO créer l'adapter
+        recyclerView.setLayoutManager(layoutManager);
+        listAdapter = new ListAdapter(filmArrayList, this);
+        recyclerView.setAdapter(listAdapter);
     }
+
 }

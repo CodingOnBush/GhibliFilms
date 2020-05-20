@@ -1,9 +1,12 @@
 package com.example.ghiblifilms;
 
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,20 +14,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RecyclerViewFilmsController {
+class RecyclerViewFilmsController {
     private RecyclerViewFilmsActivity view;
     private ArrayList<Film> filmArrayList;
 
-    public RecyclerViewFilmsController(RecyclerViewFilmsActivity view) {
+    RecyclerViewFilmsController(RecyclerViewFilmsActivity view, ArrayList<Film> filmArrayList) {
         this.view = view;
+        this.filmArrayList = filmArrayList;
     }
 
-    public void onStart(){
+    void onStart(){
         makeApiCall();
-        view.showFilmList(filmArrayList);
     }
 
-    public void makeApiCall(){
+    private void makeApiCall(){
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -36,21 +39,25 @@ public class RecyclerViewFilmsController {
 
         GhibliApi ghibliApi = retrofit.create(GhibliApi.class);
 
-        Call<RestGhibliFilmsResponse> call = ghibliApi.getRestGhibliFilmsResponse();
-        call.enqueue(new Callback<RestGhibliFilmsResponse>() {
+        Call<ArrayList<Film>> call = ghibliApi.getFilm();
+
+        call.enqueue(new Callback<ArrayList<Film>>() {
             @Override
-            public void onResponse(Call<RestGhibliFilmsResponse> call, Response<RestGhibliFilmsResponse> response) {
+            public void onResponse(Call<ArrayList<Film>> call, Response<ArrayList<Film>> response) {
                 if(response.isSuccessful() && response.body() != null){
-                    filmArrayList = response.body().films;
+                    filmArrayList = response.body();
+                    view.showFilmList(filmArrayList);
                     System.out.println("Api call SUCCESS");
+                    Toast.makeText(view,"SUCCESS", Toast.LENGTH_SHORT).show();
                 }else{
                     System.out.println("response is not successful or response.body is null");
+                    Toast.makeText(view,"ERROR 1", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
-            public void onFailure(Call<RestGhibliFilmsResponse> call, Throwable t) {
-                System.out.println("Api call failed");
+            public void onFailure(Call<ArrayList<Film>> call, Throwable t) {
+                System.out.println(t.getMessage());
+                Toast.makeText(view,t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
