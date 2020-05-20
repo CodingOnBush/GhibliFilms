@@ -22,9 +22,7 @@ public class RecyclerViewFilmsActivity extends Activity {
         //TODO add checkbox
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recyclerview_films);
-
         filmArrayList = new ArrayList<Film>();
-
         RecyclerViewFilmsController controller = new RecyclerViewFilmsController(this, filmArrayList);
         controller.onStart();
     }

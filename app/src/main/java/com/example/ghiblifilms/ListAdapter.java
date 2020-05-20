@@ -50,7 +50,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final Film currentFilm = list.get(position);
-        String uri = "@drawable/"+currentFilm.getTitle()+"_poster";
+        String uri = "@drawable/"+currentFilm.getTitle().toLowerCase().replace(" ","_").replace("'","_");
         int imageResource = context.getResources().getIdentifier(uri, null,context.getPackageName());
         holder.img.setImageResource(imageResource);
         holder.txt.setText(currentFilm.getTitle());
