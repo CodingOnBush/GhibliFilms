@@ -16,6 +16,7 @@ public class RecyclerViewFilmsActivity extends Activity {
     private ListAdapter listAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Film> filmArrayList;
+    private RecyclerViewFilmsController controller;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public class RecyclerViewFilmsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recyclerview_films);
         filmArrayList = new ArrayList<Film>();
-        RecyclerViewFilmsController controller = new RecyclerViewFilmsController(this, filmArrayList);
+        controller = new RecyclerViewFilmsController(this, filmArrayList);
         controller.onStart();
     }
 
@@ -41,8 +42,9 @@ public class RecyclerViewFilmsActivity extends Activity {
                 LinearLayoutManager.HORIZONTAL,
                 false);
         recyclerView.setLayoutManager(layoutManager);
-        listAdapter = new ListAdapter(filmArrayList, this);
+        listAdapter = new ListAdapter(filmArrayList, this, controller);
         recyclerView.setAdapter(listAdapter);
+        listAdapter.notifyDataSetChanged();
     }
 
 }

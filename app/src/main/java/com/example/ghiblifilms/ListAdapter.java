@@ -1,6 +1,7 @@
 package com.example.ghiblifilms;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +16,25 @@ import java.util.ArrayList;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private ArrayList<Film> list;
     private Context context;
+    private RecyclerViewFilmsController recyclerViewFilmsController;
 
     ListAdapter(ArrayList<Film> list, Context context) {
         this.list = list;
         this.context = context;
     }
 
+    public ListAdapter(ArrayList<Film> list, Context context, RecyclerViewFilmsController recyclerViewFilmsController) {
+        this.list = list;
+        this.context = context;
+        this.recyclerViewFilmsController = recyclerViewFilmsController;
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
         TextView txt;
-        View layout;
 
         ViewHolder(View v) {
             super(v);
-            layout = v;
             img = v.findViewById(R.id.filmPoster);
             txt = v.findViewById(R.id.filmTitle);
         }
@@ -54,6 +60,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         int imageResource = context.getResources().getIdentifier(uri, null,context.getPackageName());
         holder.img.setImageResource(imageResource);
         holder.txt.setText(currentFilm.getTitle());
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewFilmsController.navigateToDetail();
+            }
+        });
         //TODO holder.txt.setOnClicker(new OnClickListener(){__activer une chek box__})
     }
 

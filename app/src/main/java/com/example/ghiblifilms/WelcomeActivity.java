@@ -2,7 +2,6 @@ package com.example.ghiblifilms;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 

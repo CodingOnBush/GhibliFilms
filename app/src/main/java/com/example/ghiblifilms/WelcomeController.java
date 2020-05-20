@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 class WelcomeController {
     private WelcomeActivity welcomeActivity;
+    public ArrayList<Film> list;
 
     WelcomeController(WelcomeActivity welcomeActivity) {
         this.welcomeActivity = welcomeActivity;

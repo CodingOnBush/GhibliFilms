@@ -1,5 +1,6 @@
 package com.example.ghiblifilms;
 
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -60,5 +61,11 @@ class RecyclerViewFilmsController {
                 Toast.makeText(view,t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void navigateToDetail() {
+        Intent intent = new Intent(view, DetailActivity.class);
+        view.startActivity(intent);
+        view.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }
