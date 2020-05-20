@@ -1,30 +1,58 @@
 package com.example.ghiblifilms;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Context;
 import android.os.Bundle;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import android.content.Intent;
+
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer.Provider;
+
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
-public class DetailActivity extends Activity {
-    private HashMap<String,String> traillers;
-    private String currentFilm;
+public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
+    private HashMap<String, String> trailers;
+    private String currentFilmTitle;
+    private static final int RECOVERY_REQUEST = 1;
+    private YouTubePlayerView youTubeView;
+    private MyPlayerStateChangeListener playerStateChangeListener;
+    private MyPlaybackEventListener playbackEventListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
-        traillers = new HashMap<String, String>();
-        currentFilm = "";
-        SharedPreferences settings = getSharedPreferences("CURFILM", 0);
-        settings.getString("currentFilm", currentFilm);
+
+        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+
+        playerStateChangeListener = new MyPlayerStateChangeListener();
+        playbackEventListener = new MyPlaybackEventListener();
+
+        trailers = new HashMap<String, String>();
         loadFilmTrailer();
-        webView(currentFilm);
+
+        Film currentFilm = getCurrentFilmFromCache();
+
+        Toast.makeText(getApplicationContext(), currentFilm.getTitle(), Toast.LENGTH_LONG).show();
+
+        currentFilmTitle = currentFilm
+                .getTitle()
+                .toLowerCase()
+                .replace(" ", "_")
+                .replace("'", "_");
+
+        //videoView(filmTitle);
     }
 
     @Override
@@ -33,34 +61,157 @@ public class DetailActivity extends Activity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-    public void webView(String filmTitle){
-        WebView webView;
-        webView = (WebView) findViewById(R.id.trailler);
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl(traillers.get(filmTitle));
+    @Override
+    public void onInitializationSuccess(Provider provider, YouTubePlayer player, boolean wasRestored) {
+        player.setPlayerStateChangeListener(playerStateChangeListener);
+        player.setPlaybackEventListener(playbackEventListener);
+
+        if (!wasRestored) {
+            player.cueVideo(trailers.get(currentFilmTitle)); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+        }
     }
 
-    public void loadFilmTrailer(){
-        traillers.put("spirited_away","https://www.youtube-nocookie.com/embed/5-cro68n7CE");
-        traillers.put("arrietty","https://www.youtube.com/watch?v=RYwYgH9uA_8");
-        traillers.put("castle_in_the_sky","https://www.youtube.com/watch?v=kqQxEe-tro0");
-        traillers.put("from_up_on_poppy_hill","https://www.youtube.com/watch?v=tVnW2Dk4zdg");
-        traillers.put("grave_of_the_fireflies","");
-        traillers.put("howl_s_moving_castle","");
-        traillers.put("kiki_s_delivery_service","");
-        traillers.put("my_neighbor_totoro","");
-        traillers.put("my_neighbors_the_yamadas","");
-        traillers.put("only_yesterday","");
-        traillers.put("pom_poko","");
-        traillers.put("ponyo","");
-        traillers.put("porco_rosso","");
-        traillers.put("princess_mononoke","");
-        traillers.put("tales_from_earthsea","");
-        traillers.put("the_cat_returns","");
-        traillers.put("the_tale_of_the_princess_kaguya","");
-        traillers.put("the_wind_rises","");
-        traillers.put("when_marnie_was_there","");
-        traillers.put("whisper_of_the_heart","");
+    @Override
+    public void onInitializationFailure(Provider provider, YouTubeInitializationResult errorReason) {
+        if (errorReason.isUserRecoverableError()) {
+            errorReason.getErrorDialog(this, RECOVERY_REQUEST).show();
+        } else {
+            String error = String.format(getString(R.string.player_error), errorReason.toString());
+            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RECOVERY_REQUEST) {
+            // Retry initialization if user performed a recovery action
+            getYouTubePlayerProvider().initialize(Config.YOUTUBE_API_KEY, this);
+        }
+    }
+
+    protected Provider getYouTubePlayerProvider() {
+        return youTubeView;
+    }
+
+    private void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    private final class MyPlaybackEventListener implements YouTubePlayer.PlaybackEventListener {
+
+        @Override
+        public void onPlaying() {
+            // Called when playback starts, either due to user action or call to play().
+            showMessage("Playing");
+        }
+
+        @Override
+        public void onPaused() {
+            // Called when playback is paused, either due to user action or call to pause().
+            showMessage("Paused");
+        }
+
+        @Override
+        public void onStopped() {
+            // Called when playback stops for a reason other than being paused.
+            showMessage("Stopped");
+        }
+
+        @Override
+        public void onBuffering(boolean b) {
+            // Called when buffering starts or ends.
+        }
+
+        @Override
+        public void onSeekTo(int i) {
+            // Called when a jump in playback position occurs, either
+            // due to user scrubbing or call to seekRelativeMillis() or seekToMillis()
+        }
+    }
+
+    private final class MyPlayerStateChangeListener implements YouTubePlayer.PlayerStateChangeListener {
+
+        @Override
+        public void onLoading() {
+            // Called when the player is loading a video
+            // At this point, it's not ready to accept commands affecting playback such as play() or pause()
+        }
+
+        @Override
+        public void onLoaded(String s) {
+            // Called when a video is done loading.
+            // Playback methods such as play(), pause() or seekToMillis(int) may be called after this callback.
+        }
+
+        @Override
+        public void onAdStarted() {
+            // Called when playback of an advertisement starts.
+        }
+
+        @Override
+        public void onVideoStarted() {
+            // Called when playback of the video starts.
+        }
+
+        @Override
+        public void onVideoEnded() {
+            // Called when the video reaches its end.
+        }
+
+        @Override
+        public void onError(YouTubePlayer.ErrorReason errorReason) {
+            // Called when an error occurs.
+        }
+    }
+
+    /*
+    @SuppressLint("SetJavaScriptEnabled")
+    public void videoView(String filmTitle) {
+        VideoView videoView;
+        videoView = (VideoView) findViewById(R.id.trailler);
+        String url = trailers.get(filmTitle);
+        Uri vidUri = Uri.parse(url);
+        videoView.setVideoURI(vidUri);
+        videoView.start();
+    }*/
+
+    public Film getCurrentFilmFromCache() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        String jsonFilm = getSharedPreferences("saveFilms", Context.MODE_PRIVATE)
+                .getString("jsonStringCurrentFilm", null);
+
+        if (jsonFilm == null) {
+            return null;
+        } else {
+            Type type = new TypeToken<Film>() {
+            }.getType();
+            // On déserialise la liste
+            return gson.fromJson(jsonFilm, type);
+        }
+    }
+
+    public void loadFilmTrailer() {
+        trailers.put("spirited_away", "");
+        trailers.put("arrietty", "RYwYgH9uA_8");
+        trailers.put("castle_in_the_sky", "kqQxEe-tro0");
+        trailers.put("from_up_on_poppy_hill", "tVnW2Dk4zdg");
+        trailers.put("grave_of_the_fireflies", "");
+        trailers.put("howl_s_moving_castle", "");
+        trailers.put("kiki_s_delivery_service", "");
+        trailers.put("my_neighbor_totoro", "");
+        trailers.put("my_neighbors_the_yamadas", "");
+        trailers.put("only_yesterday", "");
+        trailers.put("pom_poko", "");
+        trailers.put("ponyo", "");
+        trailers.put("porco_rosso", "");
+        trailers.put("princess_mononoke", "");
+        trailers.put("tales_from_earthsea", "");
+        trailers.put("the_cat_returns", "");
+        trailers.put("the_tale_of_the_princess_kaguya", "");
+        trailers.put("the_wind_rises", "");
+        trailers.put("when_marnie_was_there", "");
+        trailers.put("whisper_of_the_heart", "");
     }
 }

@@ -116,8 +116,7 @@ public class FilmsActivity extends Activity {
 
             @Override
             public void onFailure(Call<ArrayList<Film>> call, Throwable t) {
-                System.out.println("ON FAILUREEEEEEEEEEEEEEEEEEEEEEEEE" + t.getMessage());
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "ERROR :" + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

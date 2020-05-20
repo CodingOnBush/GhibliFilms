@@ -8,9 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 
@@ -57,10 +61,25 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveCurrentFilm(currentFilm);
                 filmsActivity.navigateToDetail();
             }
         });
         //TODO holder.txt.setOnClicker(new OnClickListener(){__activer une chek box__})
+    }
+
+    private void saveCurrentFilm(Film currentFilm) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        String jsonString = gson.toJson(currentFilm);
+
+        filmsActivity.getSharedPreferences("saveFilms", Context.MODE_PRIVATE)
+                .edit()
+                .putString("jsonStringCurrentFilm", jsonString)
+                .apply();
+
+        Toast.makeText(filmsActivity.getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
     }
 
 
