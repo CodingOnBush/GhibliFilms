@@ -20,6 +20,9 @@
         android:text="@string/welcome_text"
         android:textAlignment="center"
         android:paddingBottom="60dp"
+        android:textSize="30sp"
+        android:fontFamily="cursive"
+        android:textStyle="bold"
         android:paddingTop="10dp"/>
 
     <Button

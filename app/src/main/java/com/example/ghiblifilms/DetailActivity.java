@@ -1,8 +1,12 @@
 package com.example.ghiblifilms;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.ServiceConnection;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.PowerManager;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -21,6 +25,7 @@ import android.content.Intent;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
+import com.r0adkll.slidr.Slidr;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -37,6 +42,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
+
+        Slidr.attach(this);
 
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
@@ -62,18 +69,18 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         TextView producer = (TextView) findViewById(R.id.filmProducer);
         TextView director = (TextView) findViewById(R.id.filmDirector);
         TextView description = (TextView) findViewById(R.id.filmDescription);
+        TextView releaseDate = (TextView) findViewById(R.id.release);
+        TextView rtScore = (TextView) findViewById(R.id.rtscore);
 
         detailFilmTitle.setText(currentFilm.getTitle());
         littlePoster.setImageResource(imageResource);
         producer.setText(currentFilm.getProducer());
         director.setText(currentFilm.getDirector());
+        releaseDate.setText(currentFilm.getRelease_date());
+        rtScore.setText(currentFilm.getRt_score());
         description.setText(currentFilm.getDescription());
-    }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
 
     @Override
@@ -92,7 +99,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
             errorReason.getErrorDialog(this, RECOVERY_REQUEST).show();
         } else {
             String error = String.format(getString(R.string.player_error), errorReason.toString());
-            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+            System.out.println(error);
+            //Toast.makeText(this, error, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -109,7 +117,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
     }
 
     private void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        System.out.println(message);
+        //Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     private final class MyPlaybackEventListener implements YouTubePlayer.PlaybackEventListener {
@@ -200,7 +209,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
     public void loadFilmTrailer() {
         trailers.put("spirited_away", "5-cro68n7CE");
         trailers.put("arrietty", "RYwYgH9uA_8");
-        trailers.put("castle_in_the_sky", "kqQxEe-tro0");
+        trailers.put("castle_in_the_sky", "bubkUJcYmeo");
         trailers.put("from_up_on_poppy_hill", "tVnW2Dk4zdg");
         trailers.put("grave_of_the_fireflies", "4vPeTSRd580");
         trailers.put("howl_s_moving_castle", "pGEsAlY49hw");

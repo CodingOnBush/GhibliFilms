@@ -1,5 +1,6 @@
 package com.example.ghiblifilms;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -51,13 +52,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return new ViewHolder(v);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final Film currentFilm = list.get(position);
         String uri = "@drawable/" + currentFilm.getTitle().toLowerCase().replace(" ", "_").replace("'", "_");
         int imageResource = filmsActivity.getResources().getIdentifier(uri, null, filmsActivity.getPackageName());
         holder.img.setImageResource(imageResource);
-        holder.txt.setText(currentFilm.getTitle());
+        holder.txt.setText((currentFilm.getTitle())+" - "+(currentFilm.getRelease_date()));
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +67,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 filmsActivity.navigateToDetail();
             }
         });
+
         //TODO holder.txt.setOnClicker(new OnClickListener(){__activer une chek box__})
     }
 

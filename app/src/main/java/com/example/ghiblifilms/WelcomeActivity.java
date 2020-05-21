@@ -1,11 +1,15 @@
 package com.example.ghiblifilms;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -42,7 +46,7 @@ public class WelcomeActivity extends Activity {
     private void navigateToRecyclerviewFilms(){
         Intent intent = new Intent(this, FilmsActivity.class);
         this.startActivity(intent);
-        this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        //this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         //TODO Ajouter une animation pour revenir en arrière avec un swipe
     }
 }

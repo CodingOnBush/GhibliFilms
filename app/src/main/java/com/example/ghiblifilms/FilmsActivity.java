@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.ArraySet;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.r0adkll.slidr.Slidr;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -43,6 +45,9 @@ public class FilmsActivity extends Activity {
         //TODO add checkbox
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recyclerview_films);
+
+        Slidr.attach(this);
+
         ApiFilmsResponse allFilms = new ApiFilmsResponse();
         ArrayList<Film> arrayList = new ArrayList<Film>();
 
@@ -73,11 +78,6 @@ public class FilmsActivity extends Activity {
         }
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-    }
 
     public void showFilmList(ArrayList<Film> filmArrayList) {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -87,8 +87,11 @@ public class FilmsActivity extends Activity {
                 LinearLayoutManager.HORIZONTAL,
                 false);
         recyclerView.setLayoutManager(layoutManager);
+
+
         listAdapter = new ListAdapter(filmArrayList, this);
         recyclerView.setAdapter(listAdapter);
+
     }
 
     private void makeApiCall() {
@@ -135,7 +138,8 @@ public class FilmsActivity extends Activity {
     public void navigateToDetail() {
         Intent intent = new Intent(this, DetailActivity.class);
         this.startActivity(intent);
-        this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+        //this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
 }
