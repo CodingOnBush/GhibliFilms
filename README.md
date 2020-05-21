@@ -44,8 +44,6 @@ J'ai réalisé cette application portant sur les films du Studio Ghibli. Vous re
 
 ![details](3.png)
 
-## Potentiels améliorations
-
 ## Remerciements :
 Mon cousin Youssef pour m'avoir prêté son OnePlus doté de l'OS Android.
 Mon professeur pour ses conseils et sa réactivité.
