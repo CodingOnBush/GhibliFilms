@@ -9,16 +9,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".FilmsActivity"
+            android:name=".presentation.view.FilmsActivity"
             android:banner="@color/colorPrimary"
             android:theme="@style/AppTheme.Slide"
             android:label="Ghibli films" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".presentation.view.DetailActivity"
             android:banner="@android:color/black"
             android:theme="@style/AppTheme.Slide"/>
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".presentation.view.WelcomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
             android:banner="@style/Theme.AppCompat.NoActionBar">

@@ -1,4 +1,4 @@
-package com.example.ghiblifilms;
+package com.example.ghiblifilms.presentation.model;
 
 import java.util.ArrayList;
 

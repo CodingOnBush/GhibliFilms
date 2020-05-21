@@ -1,20 +1,15 @@
-package com.example.ghiblifilms;
+package com.example.ghiblifilms.presentation.view;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.ServiceConnection;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.PowerManager;
-import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.ghiblifilms.Config;
+import com.example.ghiblifilms.R;
+import com.example.ghiblifilms.presentation.model.Film;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.gson.Gson;

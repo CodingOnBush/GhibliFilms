@@ -1,19 +1,21 @@
-package com.example.ghiblifilms;
+package com.example.ghiblifilms.presentation.view;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.ArraySet;
-import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ghiblifilms.Constants;
+import com.example.ghiblifilms.R;
+import com.example.ghiblifilms.data.GhibliApi;
+import com.example.ghiblifilms.presentation.model.ApiFilmsResponse;
+import com.example.ghiblifilms.presentation.model.Film;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -21,10 +23,6 @@ import com.r0adkll.slidr.Slidr;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
 
 import retrofit2.Call;
 import retrofit2.Callback;

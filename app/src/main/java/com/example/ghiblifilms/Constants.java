@@ -4,6 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-class Constants {
-    static String BASE_URL = "https://ghibliapi.herokuapp.com/";
+public class Constants {
+    public static String BASE_URL = "https://ghibliapi.herokuapp.com/";
 }

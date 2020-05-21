@@ -1,20 +1,18 @@
-package com.example.ghiblifilms;
+package com.example.ghiblifilms.presentation.view;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import com.example.ghiblifilms.R;
 
 public class WelcomeActivity extends Activity {
 

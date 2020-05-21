@@ -1,7 +1,8 @@
-package com.example.ghiblifilms;
+package com.example.ghiblifilms.data;
+
+import com.example.ghiblifilms.presentation.model.Film;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
