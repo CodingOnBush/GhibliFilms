@@ -1,90 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black"
-    android:scrollbars="vertical"
-    android:isScrollContainer="true"
-    android:scrollbarFadeDuration="@android:integer/config_mediumAnimTime"
-    android:scrollbarThumbVertical="@null">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/detail_filmTitle"
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:paddingBottom="30dp"
-        android:textSize="30sp"
-        android:textColor="@android:color/white"/>
+        android:background="@android:color/black"
+        android:isScrollContainer="true"
+        android:scrollbarFadeDuration="@android:integer/config_mediumAnimTime"
+        android:scrollbarThumbVertical="@null"
+        android:scrollbars="vertical">
 
-    <com.google.android.youtube.player.YouTubePlayerView
-        android:id="@+id/youtube_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_filmTitle"
-        android:clipToPadding="true"/>
+        <TextView
+            android:id="@+id/detail_filmTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="30dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
 
-    <CheckedTextView
-        android:id="@+id/checkbox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/youtube_view"
-        android:paddingTop="30dp"
-        android:textAlignment="center" />
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/youtube_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/detail_filmTitle"
+            android:clipToPadding="true" />
 
-    <ImageView
-        android:id="@+id/littleFilmPoster"
-        android:layout_width="150dp"
-        android:layout_height="210dp"
-        android:layout_alignParentStart="true"
-        tools:ignore="ContentDescription,RtlSymmetry"
-        android:padding="3dp"
-        android:background="@drawable/little_border"
-        android:layout_below="@id/checkbox"/>
-    <TextView
-        android:id="@+id/filmDirectorTxt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Director"
-        android:paddingTop="20dp"
-        android:paddingHorizontal="20dp"
-        android:textSize="20sp"
-        android:layout_below="@id/checkbox"
-        android:layout_toEndOf="@id/littleFilmPoster"/>
-    <TextView
-        android:id="@+id/filmDirector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:layout_below="@id/filmDirectorTxt"
-        android:layout_toEndOf="@id/littleFilmPoster"/>
-    <TextView
-        android:id="@+id/filmProducerTxt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Producer"
-        android:textSize="20sp"
-        android:paddingTop="20dp"
-        android:paddingHorizontal="20dp"
-        android:layout_below="@id/filmDirector"
-        android:layout_toEndOf="@id/littleFilmPoster"/>
-    <TextView
-        android:id="@+id/filmProducer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:layout_below="@id/filmProducerTxt"
-        android:layout_toEndOf="@id/littleFilmPoster"/>
+        <CheckedTextView
+            android:id="@+id/checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/youtube_view"
+            android:paddingTop="30dp"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/littleFilmPoster"
+            android:layout_width="150dp"
+            android:layout_height="210dp"
+            android:layout_below="@id/checkbox"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/little_border"
+            android:padding="3dp"
+            tools:ignore="ContentDescription,RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/filmDirectorTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkbox"
+            android:layout_toEndOf="@id/littleFilmPoster"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:text="Director"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/filmDirector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filmDirectorTxt"
+            android:layout_toEndOf="@id/littleFilmPoster"
+            android:paddingHorizontal="20dp" />
+
+        <TextView
+            android:id="@+id/filmProducerTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filmDirector"
+            android:layout_toEndOf="@id/littleFilmPoster"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:text="Producer"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/filmProducer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filmProducerTxt"
+            android:layout_toEndOf="@id/littleFilmPoster"
+            android:paddingHorizontal="20dp" />
 
 
+        <TextView
+            android:id="@+id/filmDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/littleFilmPoster"
+            android:padding="20dp"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/filmDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:textSize="20sp"
-        android:layout_below="@id/littleFilmPoster"/>
+    </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>
