@@ -1,7 +1,10 @@
 package com.example.ghiblifilms;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,6 +19,8 @@ import android.content.Intent;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
+
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -43,16 +48,24 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         loadFilmTrailer();
 
         Film currentFilm = getCurrentFilmFromCache();
-
-        Toast.makeText(getApplicationContext(), currentFilm.getTitle(), Toast.LENGTH_LONG).show();
-
         currentFilmTitle = currentFilm
                 .getTitle()
                 .toLowerCase()
                 .replace(" ", "_")
                 .replace("'", "_");
 
-        //videoView(filmTitle);
+        String drawablePath = "@drawable/" + currentFilmTitle;
+        int imageResource = getResources().getIdentifier(drawablePath, null, getPackageName());
+
+        ImageView littlePoster = (ImageView) findViewById(R.id.littleFilmPoster);
+        TextView producer = (TextView) findViewById(R.id.filmProducer);
+        TextView director = (TextView) findViewById(R.id.filmDirector);
+        TextView description = (TextView) findViewById(R.id.filmDescription);
+
+        littlePoster.setImageResource(imageResource);
+        producer.setText(currentFilm.getProducer());
+        director.setText(currentFilm.getDirector());
+        description.setText(currentFilm.getDescription());
     }
 
     @Override
