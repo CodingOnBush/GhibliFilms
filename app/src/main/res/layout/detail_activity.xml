@@ -14,15 +14,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:paddingBottom="30dp"
+        android:textSize="30sp"
         android:textColor="@android:color/white"/>
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/youtube_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/detail_filmTitle"/>
+        android:layout_below="@id/detail_filmTitle"
+        android:clipToPadding="true"/>
 
+    <CheckedTextView
+        android:id="@+id/checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/youtube_view"
+        android:paddingTop="30dp"
+        android:textAlignment="center" />
 
     <ImageView
         android:id="@+id/littleFilmPoster"
@@ -32,7 +41,7 @@
         tools:ignore="ContentDescription,RtlSymmetry"
         android:padding="3dp"
         android:background="@drawable/little_border"
-        android:layout_below="@id/youtube_view"/>
+        android:layout_below="@id/checkbox"/>
     <TextView
         android:id="@+id/filmDirectorTxt"
         android:layout_width="match_parent"
@@ -41,7 +50,7 @@
         android:paddingTop="20dp"
         android:paddingHorizontal="20dp"
         android:textSize="20sp"
-        android:layout_below="@id/youtube_view"
+        android:layout_below="@id/checkbox"
         android:layout_toEndOf="@id/littleFilmPoster"/>
     <TextView
         android:id="@+id/filmDirector"
@@ -75,6 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/littleFilmPoster"/>
 
 </RelativeLayout>

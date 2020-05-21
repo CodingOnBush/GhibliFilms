@@ -20,8 +20,6 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
 
-import org.w3c.dom.Text;
-
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
@@ -57,11 +55,13 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         String drawablePath = "@drawable/" + currentFilmTitle;
         int imageResource = getResources().getIdentifier(drawablePath, null, getPackageName());
 
+        TextView detailFilmTitle = (TextView) findViewById(R.id.detail_filmTitle);
         ImageView littlePoster = (ImageView) findViewById(R.id.littleFilmPoster);
         TextView producer = (TextView) findViewById(R.id.filmProducer);
         TextView director = (TextView) findViewById(R.id.filmDirector);
         TextView description = (TextView) findViewById(R.id.filmDescription);
 
+        detailFilmTitle.setText(currentFilm.getTitle());
         littlePoster.setImageResource(imageResource);
         producer.setText(currentFilm.getProducer());
         director.setText(currentFilm.getDirector());
@@ -177,16 +177,6 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         }
     }
 
-    /*
-    @SuppressLint("SetJavaScriptEnabled")
-    public void videoView(String filmTitle) {
-        VideoView videoView;
-        videoView = (VideoView) findViewById(R.id.trailler);
-        String url = trailers.get(filmTitle);
-        Uri vidUri = Uri.parse(url);
-        videoView.setVideoURI(vidUri);
-        videoView.start();
-    }*/
 
     public Film getCurrentFilmFromCache() {
         Gson gson = new GsonBuilder()
@@ -206,25 +196,25 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
     }
 
     public void loadFilmTrailer() {
-        trailers.put("spirited_away", "");
+        trailers.put("spirited_away", "5-cro68n7CE");
         trailers.put("arrietty", "RYwYgH9uA_8");
         trailers.put("castle_in_the_sky", "kqQxEe-tro0");
         trailers.put("from_up_on_poppy_hill", "tVnW2Dk4zdg");
-        trailers.put("grave_of_the_fireflies", "");
-        trailers.put("howl_s_moving_castle", "");
-        trailers.put("kiki_s_delivery_service", "");
-        trailers.put("my_neighbor_totoro", "");
-        trailers.put("my_neighbors_the_yamadas", "");
-        trailers.put("only_yesterday", "");
-        trailers.put("pom_poko", "");
-        trailers.put("ponyo", "");
-        trailers.put("porco_rosso", "");
-        trailers.put("princess_mononoke", "");
-        trailers.put("tales_from_earthsea", "");
-        trailers.put("the_cat_returns", "");
-        trailers.put("the_tale_of_the_princess_kaguya", "");
-        trailers.put("the_wind_rises", "");
-        trailers.put("when_marnie_was_there", "");
-        trailers.put("whisper_of_the_heart", "");
+        trailers.put("grave_of_the_fireflies", "4vPeTSRd580");
+        trailers.put("howl_s_moving_castle", "pGEsAlY49hw");
+        trailers.put("kiki_s_delivery_service", "4bG17OYs-GA");
+        trailers.put("my_neighbor_totoro", "92a7Hj0ijLs");
+        trailers.put("my_neighbors_the_yamadas", "1C9ujuCPlnY");
+        trailers.put("only_yesterday", "OfkQlZArxw0");
+        trailers.put("pom_poko", "_7cowIHjCD4");
+        trailers.put("ponyo", "YTrEECZhpL0");
+        trailers.put("porco_rosso", "awEC-aLDzjs");
+        trailers.put("princess_mononoke", "YOuG8m2RqOs");
+        trailers.put("tales_from_earthsea", "zxSNcsox7nQ");
+        trailers.put("the_cat_returns", "2JVas8usn6o");
+        trailers.put("the_tale_of_the_princess_kaguya", "W71mtorCZDw");
+        trailers.put("the_wind_rises", "RzSpDgiF5y8");
+        trailers.put("when_marnie_was_there", "jjmrxqcQdYg");
+        trailers.put("whisper_of_the_heart", "0pVkiod6V0U");
     }
 }
