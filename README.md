@@ -27,14 +27,14 @@ J'ai réalisé cette application portant sur les films du Studio Ghibli. Vous re
 - Une activitée de bienvenue pour rediriger vers une activitée avec la liste des films.
 - Un bouton qui pourrait dans un futur proche rediriger vers un menu pour enrichir l'application.
 
-![welcome](https://github.com/CodingOnBush/GhibliFilms/blob/master/1.png | width=200)
+![welcome](1.png | width=200)
 
 ### Écran de présentation des films
 - Une présentation des films par leurs affiches avant d'accéder aux détails.
 - Recycler view en horizontal pour une meilleure présentation des affiches de film.
 - Posibilité de scroll car le synopsis du film peut être long.
 
-![films](https://github.com/CodingOnBush/GhibliFilms/blob/master/1.png | width=200)
+![films](2.png | width=200)
 
 ### Écran des détails
 - Swipe vers la droite pour revenir en arrière dans l'activité détail
@@ -42,7 +42,7 @@ J'ai réalisé cette application portant sur les films du Studio Ghibli. Vous re
 - Utilisation de YouTubePlayerView en suivant ce tuto : https://www.sitepoint.com/using-the-youtube-api-to-embed-video-in-an-android-app/
 - Un lot de détails concernant le film sélectionné.
 
-![details](https://github.com/CodingOnBush/GhibliFilms/blob/master/1.png | width=200)
+![details](3.png | width=200)
 
 ## Potentiels améliorations
 
