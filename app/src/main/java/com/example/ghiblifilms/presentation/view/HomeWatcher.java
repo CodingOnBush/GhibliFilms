@@ -1,4 +1,4 @@
-package com.example.ghiblifilms.presentation.controller;
+package com.example.ghiblifilms.presentation.view;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -7,44 +7,26 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.example.ghiblifilms.R;
+import com.example.ghiblifilms.presentation.controller.WelcomeController;
 
 public class WelcomeActivity extends Activity {
+    WelcomeController welcomeController;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.welcome);
 
-        Button button_welcome = (Button) findViewById(R.id.welcome_button);
-        button_welcome.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                if(!isNetworkAvailable()){
-                    Toast.makeText(getApplicationContext(), "You need a first connection to get API text", Toast.LENGTH_LONG).show();
-                }else{
-                    navigateToRecyclerviewFilms();
-                }
-            }
-        });
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        assert connectivityManager != null;
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-    private void navigateToRecyclerviewFilms(){
-        Intent intent = new Intent(this, FilmsActivity.class);
-        this.startActivity(intent);
-        //this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        //TODO Ajouter une animation pour revenir en arrière avec un swipe
+        welcomeController = new WelcomeController(this);
+        welcomeController.onStart();
     }
 }
